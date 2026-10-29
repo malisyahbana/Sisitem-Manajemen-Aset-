@@ -1,7 +1,9 @@
 <?php
-date_default_timezone_set('Asia/jakarta');
+date_default_timezone_set('Asia/Jakarta');
 
-session_start();
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 
 // Konfigurasi DataBase
 include_once "database.php";
@@ -13,13 +15,17 @@ if (mysqli_connect_errno()) {
 // Konfigurasi baseurl
 function base_url($url = null)
 {
-    $base_url = "http://localhost/asetdisdik";
+    $env_base = getenv('BASE_URL');
+    if ($env_base !== false && $env_base !== '') {
+        $base_url = rtrim($env_base, '/');
+    } else {
+        $base_url = "http://localhost/asetdisdik";
+    }
+
     if ($url != null) {
-        return $base_url . "/" . $url;
+        return $base_url . "/" . ltrim($url, '/');
     } else {
         return $base_url;
     }
 }
-?>
-<?php
 ?>

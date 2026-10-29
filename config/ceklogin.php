@@ -25,6 +25,6 @@ if (isset($_POST['login'])) {
     } else {
 
         echo "<script>alert('Username dan Password Tidak Ditemukan');</script>";
-        echo "<meta http-equiv='refresh' content='0; url=../Login.php'>";
+        echo "<meta http-equiv='refresh' content='0; url=../login.php'>";
     }
 }
